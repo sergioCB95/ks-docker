@@ -16,6 +16,8 @@ FROM node:14-alpine AS runner
 
 WORKDIR /usr/src/app
 
-COPY --from=builder /usr/src/app/dist .
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
 
-CMD ['npm', 'start']
+EXPOSE 3000
+CMD ["node", "dist/main"]
